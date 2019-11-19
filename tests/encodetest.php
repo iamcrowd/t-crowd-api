@@ -22,22 +22,26 @@
  */
 
 include("../api/config.php");
-include("../api/connector.php");
+//include("../api/connector.php");
+include("../src/encode.php");
 
 use Tcrowd\api\Connector;
+use Tcrowd\src\Encode;
 use PHPUnit\Framework\TestCase;
 
-class ConnectorTest extends TestCase
+
+class EncodeTest extends TestCase
 {
 
-    public function testConnector(){
+    public function testEncodeDlLiteFpx(){
 
-        $t_crowd = new Connector();
-        //print_r($t_crowd);
+        $json_str = "a";
 
-        $t_crowd->run("a",'tdllitefpx');
+        $t_crowd = new Encode();
 
-        return $t_crowd->get_answer();
+        $ans = $t_crowd->encode($json_str,'tdllitefpx');
+
+        print_r($ans);
 
         /*$actual = $racer->get_col_answers()[0];
 

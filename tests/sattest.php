@@ -23,25 +23,26 @@
 
 include("../api/config.php");
 include("../api/connector.php");
+include("../src/sat.php");
 
-use Tcrowd\api\Connector;
+//use Tcrowd\api\Connector;
+use Tcrowd\src\Sat;
 use PHPUnit\Framework\TestCase;
 
-class ConnectorTest extends TestCase
+class SatTest extends TestCase
 {
 
-    public function testConnector(){
+    public function testNuSMVSAT(){
 
-        $t_crowd = new Connector();
-        //print_r($t_crowd);
+        $json_str = "a";
 
-        $t_crowd->run("a",'tdllitefpx');
+        $t_crowd = new Sat();
 
-        return $t_crowd->get_answer();
+        $ans = $t_crowd->check_sat($json_str,'NuSMV');
 
-        /*$actual = $racer->get_col_answers()[0];
+        print_r($ans);
 
-        $expected = process_xmlspaces($expected);
+        /*$expected = process_xmlspaces($expected);
         $actual = process_xmlspaces($actual);
         $this->assertEqualXMLStructure($expected, $actual, true);*/
     }
