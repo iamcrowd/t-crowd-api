@@ -43,7 +43,7 @@ class Connector {
     }
 
     /**
-       Execute Racer with the given $document as input.
+       Execute t_crowd with the given $document as input.
        java -cp target/dependency/t-crowd-cli-4.0.0-SNAPSHOT.jar it.gilia.tcrowd.cli.TCrowd tdllitefpx -t value.json
      */
     function run($input, $command){
@@ -85,7 +85,7 @@ class Connector {
        @return true always
        @exception Exception with proper message if any problem is founded.
     */
-    function check_files($temporal_path, $racer_path, $file_path){
+    function check_files($temporal_path, $t_crowd_path, $file_path){
         if (! is_dir($temporal_path)){
             throw new \Exception("Temporal path desn't exists!
 Are you sure about this path?
@@ -106,14 +106,14 @@ Please set the write and read permissions for '$file_path'");
 Check the permissions on '${file_path}'.");
         }
 
-        if (!file_exists($racer_path)){
-            throw new \Exception("The Racer program has not been founded...
-You told me that '$racer_path' is the Racer program, is this right? check your 'web-src/config/config.php' configuration file.");
+        if (!file_exists($t_crowd_path)){
+            throw new \Exception("The t_crowd program has not been founded...
+You told me that '$t_crowd_path' is the t_crowd program, is this right? check your 'web-src/config/config.php' configuration file.");
         }
 
-        if (!is_executable($racer_path)){
-            throw new \Exception("The Racer program is not executable...
-Is the path '$racer_path' right? Is the permissions setted properly?");
+        if (!is_executable($t_crowd_path)){
+            throw new \Exception("The t_crowd program is not executable...
+Is the path '$t_crowd_path' right? Is the permissions setted properly?");
         }
 
         return true;
