@@ -35,11 +35,11 @@ class Connector {
     protected $answer = [];
 
     function __construct(){
-        $this->answers = [];
+        $this->answer = [];
     }
 
-    function get_answers(){
-        return $this->answers;
+    function get_answer(){
+        return $this->answer;
     }
 
     /**
@@ -49,17 +49,16 @@ class Connector {
     function run($input, $command){
         $t_crowd = "";
         $temporal_path = $GLOBALS['config']['temporal_path'];
-        $t_crowd_path = $GLOBALS['config']['t-crowd-lib-path'];
         $t_crowd_client = $GLOBALS['config']['t-crowd-client'];
+        $class_client = $GLOBALS['config']['t-crowd-main'];
 
         $uuid = uniqid();
 
         $temporal_path = realpath($temporal_path) . "/";
         $ervt_name = $uuid . "ervt_model.json";
         $file_path = $temporal_path . $ervt_name;
-        $t_crowd_path .= Connector::PROGRAM_CMD . " " . Connector::PROGRAM_PARAMS;
 
-        $t_crowd .= $t_crowd_path . " " . $t_crowd_client . " " . $command;
+        $t_crowd .= Connector::PROGRAM_CMD . " " . Connector::PROGRAM_PARAMS . " " . $t_crowd_client . " " . $class_client . " " . $command;
         $commandline = $t_crowd . " -t " . $file_path;
 
         $ervt_file = fopen($file_path, "w");
@@ -72,11 +71,11 @@ class Connector {
         fwrite($ervt_file, $input);
         fclose($ervt_file);
 
-        exec($commandline,$answer_lib);
+        exec($commandline, $answer_lib);
 
         unlink($file_path);
 
-        array_push($this->answer, join($answer_lib));
+        array_push($this->answer, $answer_lib);
     }
 
     /**
