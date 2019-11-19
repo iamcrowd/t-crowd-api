@@ -3,7 +3,9 @@
 namespace Tcrowd\api;
 
 include("config.php");
-include("connector.php");
+include("../src/sat.php");
+
+use Tcrowd\src\Sat;
 
 $reasoner = 'NuSMV';
 if (array_key_exists('reasoner',$_REQUEST)){
@@ -18,6 +20,6 @@ if ( ! array_key_exists('json', $_POST)){
     $sat = new Sat();
     $ans = $sat->check_sat($_POST['json'], $reasoner);
     print_r($ans);
-    
+
 }
 ?>

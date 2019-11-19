@@ -33,10 +33,10 @@ class Encode {
     function __construct(){}
 
     /**
-       Encoding the diagram represented in JSON format for reasoning.
+       Encoding the diagram represented in JSON format.
 
        @param $json_str A String with the diagram in JSON format.
-       @param $encoding A String with the encode name.
+       @param $encoding A String with the encode name (tdllitefpx|qtlz|qtlN,ltl).
 
        @return an answer object.
      */

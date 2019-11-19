@@ -26,17 +26,17 @@ namespace Tcrowd\src;
 include("../api/config.php");
 include("../api/connector.php");
 
-//use Tcrowd\api\Connector;
+use Tcrowd\api\Connector;
 
 class Sat {
 
     function __construct(){}
 
     /**
-       Check the diagram represented in JSON format for reasoning.
+       Check the diagram represented in JSON format for satisfiability.
 
        @param $json_str A String with the diagram in JSON format.
-       @param $reasoner A String with the reasoner name.
+       @param $reasoner A String with the off-the-shelf reasoner name.
 
        @return an answer object.
      */
