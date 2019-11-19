@@ -30,8 +30,7 @@ use Tcrowd\api\Connector;
 
 class Encode {
 
-    function __construct(){
-    }
+    function __construct(){}
 
     /**
        Encoding the diagram represented in JSON format for reasoning.
@@ -41,9 +40,10 @@ class Encode {
 
        @return an answer object.
      */
-    function check_sat($json_str, $encoding = 'tdllitefpx'){
+    function encode($json_str, $encoding = 'tdllitefpx'){
 
-        $connector = new Connector($json_str, $encoding);
+        $connector = new Connector();
+        $connector->run($json_str, $encoding);
         $answer = $connector->get_answer();
 
 		    return $answer;

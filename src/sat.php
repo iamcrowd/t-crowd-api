@@ -26,12 +26,11 @@ namespace Tcrowd\src;
 include("../api/config.php");
 include("../api/connector.php");
 
-use Tcrowd\api\Connector;
+//use Tcrowd\api\Connector;
 
 class Sat {
 
-    function __construct(){
-    }
+    function __construct(){}
 
     /**
        Check the diagram represented in JSON format for reasoning.
@@ -43,9 +42,10 @@ class Sat {
      */
     function check_sat($json_str, $reasoner = 'NuSMV'){
 
-        $connector = new Connector($json_str, $reasoner);
+        $connector = new Connector();
+        $connector->run($json_str, $reasoner);
         $answer = $connector->get_answer();
-        
+
 		    return $answer;
     }
 }
