@@ -31,7 +31,7 @@ class Connector {
        The t-crowd command to execute with all its parameters.
      */
     const PROGRAM_CMD = "java";
-    const PROGRAM_PARAMS = "-cp ";
+    const PROGRAM_PARAMS = "-cp";
     protected $answer = [];
 
     function __construct(){
@@ -60,7 +60,7 @@ class Connector {
         $t_crowd_path .= Connector::PROGRAM_CMD . " " . Connector::PROGRAM_PARAMS;
 
         $t_crowd .= $t_crowd_path . " " . $t_crowd_client . " " . $command;
-        $commandline = $t_crowd . " " . $file_path;
+        $commandline = $t_crowd . " -t " . $file_path;
 
         $ervt_file = fopen($file_path, "w");
 
