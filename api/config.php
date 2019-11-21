@@ -22,7 +22,7 @@ $GLOBALS['environment']='devel';
 $GLOBALS['config']['temporal_path'] = '/var/www/html/t-crowd/';
 $GLOBALS['config']['public_html'] = '/var/www/html/';
 $GLOBALS['config']['t-crowd-main'] = 'it.gilia.tcrowd.cli.TCrowd';
-$GLOBALS['config']['t-crowd-client'] = '/home/gab/Documentos/t-crowd/t-crowd-lib/target/dependency/t-crowd-cli-4.0.0-SNAPSHOT.jar';
+$GLOBALS['config']['t-crowd-client'] = '/var/www/html/t-crowd-lib/target/dependency/t-crowd-cli-4.0.0-SNAPSHOT.jar';
 
 /**
    Where is the reasoner?

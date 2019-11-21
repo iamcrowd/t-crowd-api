@@ -1,0 +1,37 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pdfpages}
+\usepackage{latexsym}
+\usepackage{amssymb,amsthm,amsmath}
+
+\begin{document}
+ \newcommand{\nxt}{{\ensuremath\raisebox{0.25ex}{\text{\scriptsize$\bigcirc$}}}}
+\newcommand{\Rdiamond}{\Diamond_{\!F}}
+\newcommand{\Rbox}{\Box_{\!F}}
+\newcommand{\Rnext}{\nxt_{\!F}}
+\newcommand{\Ldiamond}{\Diamond_{\!P}}
+\newcommand{\Lbox}{\Box_{\!P}}
+\newcommand{\Lnext}{\nxt_{\!P}}
+\newcommand{\SVdiamond}{\mathop{\ooalign{$\Diamond$ \cr \kern0.5ex
+    \raisebox{0.35ex}{\scalebox{0.7}{$*$}}} \kern-0.9ex}}
+\newcommand{\SVbox}{\mathop{\ooalign{$\Box$ \cr \kern0.42ex
+    \raisebox{0.3ex}{\scalebox{0.7}{$*$}}} \kern-0.9ex}}
+
+
+ $\{$\\ 
+$Entity \sqsubseteq  \Rbox  \Lbox Entity$\\ 
+ $ \lnot  \bot  \sqsubseteq  \Rdiamond  \Ldiamond  \lnot Entity$\\ 
+ $Integer \sqsubseteq  \lnot Entity$\\ 
+ $Integer \sqsubseteq  \lnot Entity$\\ 
+ $ \ge 1.AInv \sqsubseteq Integer$\\ 
+ $ \ge 2.A \sqsubseteq  \ge 1.A$\\ 
+ $ \ge 1.A \sqsubseteq  \Lbox  \Rbox  \ge 1.A$\\ 
+ $ \ge 2.A \sqsubseteq  \Lbox  \Rbox  \ge 2.A$\\ 
+ $ \ge 1.KInv \sqsubseteq Integer$\\ 
+ $ \ge 2.K \sqsubseteq  \ge 1.K$\\ 
+ $Entity \sqsubseteq  \ge 1.A$\\ 
+ $Entity \sqsubseteq  \lnot  \ge 2.A$\\ 
+ $Entity \sqsubseteq  \ge 1.K$\\ 
+ $Entity \sqsubseteq  \lnot  \ge 2.K$\\ 
+ $\}$ 
+\end{document}
