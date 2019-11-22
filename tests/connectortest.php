@@ -22,11 +22,9 @@
  */
 
 include("../api/config.php");
-include("../api/connector.php");
-include("../api/connectorNuSMV.php");
+include("../src/connector.php");
 
-use Tcrowd\api\Connector;
-use Tcrowd\api\ConnectorNuSMV;
+use Tcrowd\src\Connector;
 use PHPUnit\Framework\TestCase;
 
 class ConnectorTest extends TestCase
@@ -41,12 +39,4 @@ class ConnectorTest extends TestCase
       return $t_crowd->get_answer();
   }
 
-  public function testConnectorNuSMV(){
-
-        $t_crowd = new ConnectorNuSMV();
-
-        $t_crowd->run('{"entities": [{"name":"Entity","id":"c45", "timestamp": "", "position":{"x":470,"y":250}}],"attributes":[{"name":"A","type":"normal","datatype":"Integer","id":"c57", "timestamp": "", "position":{"x":327,"y":260}}],"relationships":[],"links":[{"name":"c70","entity": "Entity", "attribute": "A","type":"attribute"}]}','NuSMV');
-
-        return $t_crowd->get_answer();
-    }
 }
