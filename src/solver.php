@@ -5,7 +5,7 @@
 
    Author: gab
 
-   sat.php
+   solver.php
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -24,37 +24,7 @@
 namespace Tcrowd\src;
 
 include("../api/config.php");
-include("connector.php");
 
-use Tcrowd\src\Connector;
-
-class Encode {
-
-    protected $connector = null;
-
-    function __construct(){
-      $this->connector = new Connector();
-    }
-
-    function getCurrentConnector(){
-      return $this->connector;
-    }
-
-    /**
-       Encoding the diagram represented in JSON format.
-
-       @param $json_str A String with the diagram in JSON format.
-       @param $encoding A String with the encode name (tdllitefpx|qtlz|qtlN,ltl).
-
-       @return an answer object.
-     */
-    function encode($json_str, $encoding = 'tdllitefpx'){
-
-        $this->connector->run($json_str, $encoding);
-        $answer = $this->connector->get_answer();
-
-		    return $answer;
-    }
+abstract class Solver {
+  
 }
-
-?>

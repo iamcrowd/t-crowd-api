@@ -24,13 +24,21 @@
 namespace Tcrowd\src;
 
 include("../api/config.php");
-include("../api/connector.php");
+include("encode.php");
 
-use Tcrowd\api\Connector;
+use Tcrowd\src\Encode;
 
 class Sat {
 
-    function __construct(){}
+    protected $solver = null;
+
+    function __construct($solver){
+      $this->solver = $solver;
+    }
+
+    function getSolver(){
+      return $this->solver;
+    }
 
     /**
        Check the diagram represented in JSON format for satisfiability.
@@ -40,11 +48,14 @@ class Sat {
 
        @return an answer object.
      */
-    function check_sat($json_str, $reasoner = 'NuSMV'){
+    function check_sat($json_str){
 
-        $connector = new Connector();
-        $connector->run($json_str, $reasoner);
-        $answer = $connector->get_answer();
+        $format = $this->getSolver()->getSolverNick();
+        $encoding = new Encode();
+        $encoding->encode($json_str, $format);
+        $tmpFolderSolver = $encoding->getCurrentConnector()->getCurrentTmpFolder();
+        $this->getSolver()->run($tmpFolderSolver);
+        $answer = $this->getSolver()->get_answer();
 
 		    return $answer;
     }
