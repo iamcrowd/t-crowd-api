@@ -23,16 +23,7 @@ $GLOBALS['config']['temporal_path'] = '/tmp';
 $GLOBALS['config']['public_html'] = '/var/www/html/';
 $GLOBALS['config']['t-crowd-main'] = 'it.gilia.tcrowd.cli.TCrowd';
 $GLOBALS['config']['t-crowd-client'] = '/home/gab/Documentos/t-crowd/t-crowd-lib/target/dependency/t-crowd-cli-4.0.0-SNAPSHOT.jar';
-$GLOBALS['config']['solver_path'] = '/var/www/html/t-crowd/solver/';
-
-/**
-   Where is the reasoner?
-
-   By default we provide a Racer and a konclude program inside the temporal_path
-   (at wicom/run/), but if you want to use another program you
-   have to set this value with the path.
- */
-$GLOBALS['config']['t-nusmv_path'] = $GLOBALS['config']['solver_path'];
+$GLOBALS['config']['nusmv_path'] = '/var/www/html/t-crowd/solver/NuSMV/bin/';
 
 /**
    @name Database Configuration.
