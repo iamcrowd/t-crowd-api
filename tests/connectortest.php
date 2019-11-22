@@ -23,26 +23,30 @@
 
 include("../api/config.php");
 include("../api/connector.php");
+include("../api/connectorNuSMV.php");
 
 use Tcrowd\api\Connector;
+use Tcrowd\api\ConnectorNuSMV;
 use PHPUnit\Framework\TestCase;
 
 class ConnectorTest extends TestCase
 {
 
-    public function testConnector(){
+  public function testConnector(){
 
-        $t_crowd = new Connector();
-        //print_r($t_crowd);
+      $t_crowd = new Connector();
 
-        $t_crowd->run("a",'tdllitefpx');
+      $t_crowd->run('{"entities": [{"name":"Entity","id":"c45", "timestamp": "", "position":{"x":470,"y":250}}],"attributes":[{"name":"A","type":"normal","datatype":"Integer","id":"c57", "timestamp": "", "position":{"x":327,"y":260}}],"relationships":[],"links":[{"name":"c70","entity": "Entity", "attribute": "A","type":"attribute"}]}','tdllitefpx');
+
+      return $t_crowd->get_answer();
+  }
+
+  public function testConnectorNuSMV(){
+
+        $t_crowd = new ConnectorNuSMV();
+
+        $t_crowd->run('{"entities": [{"name":"Entity","id":"c45", "timestamp": "", "position":{"x":470,"y":250}}],"attributes":[{"name":"A","type":"normal","datatype":"Integer","id":"c57", "timestamp": "", "position":{"x":327,"y":260}}],"relationships":[],"links":[{"name":"c70","entity": "Entity", "attribute": "A","type":"attribute"}]}','NuSMV');
 
         return $t_crowd->get_answer();
-
-        /*$actual = $racer->get_col_answers()[0];
-
-        $expected = process_xmlspaces($expected);
-        $actual = process_xmlspaces($actual);
-        $this->assertEqualXMLStructure($expected, $actual, true);*/
     }
 }

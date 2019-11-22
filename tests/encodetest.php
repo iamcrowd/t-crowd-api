@@ -22,10 +22,8 @@
  */
 
 include("../api/config.php");
-//include("../api/connector.php");
 include("../src/encode.php");
 
-use Tcrowd\api\Connector;
 use Tcrowd\src\Encode;
 use PHPUnit\Framework\TestCase;
 
@@ -35,15 +33,13 @@ class EncodeTest extends TestCase
 
     public function testEncodeDlLiteFpx(){
 
-        $json_str = "a";
+        $json_str = '{"entities": [{"name":"Entity","id":"c45", "timestamp": "", "position":{"x":470,"y":250}}],"attributes":[{"name":"A","type":"normal","datatype":"Integer","id":"c57", "timestamp": "", "position":{"x":327,"y":260}}],"relationships":[],"links":[{"name":"c70","entity": "Entity", "attribute": "A","type":"attribute"}]}';
 
         $t_crowd = new Encode();
 
         $ans = $t_crowd->encode($json_str,'tdllitefpx');
 
         print_r($ans);
-
-        /*$actual = $racer->get_col_answers()[0];
 
         $expected = process_xmlspaces($expected);
         $actual = process_xmlspaces($actual);

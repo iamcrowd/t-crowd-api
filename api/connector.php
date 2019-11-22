@@ -33,13 +33,19 @@ class Connector {
     const PROGRAM_CMD = "java";
     const PROGRAM_PARAMS = "-cp";
     protected $answer = [];
+    protected $currentTmpFolder = "";
 
     function __construct(){
         $this->answer = [];
+        $this->currentTmpFolder = "";
     }
 
     function get_answer(){
-        return $this->answer;
+      return $this->answer;
+    }
+
+    function getCurrentTmpFolder(){
+      return $this->currentTmpFolder;
     }
 
     /**
@@ -48,15 +54,18 @@ class Connector {
      */
     function run($input, $command){
         $t_crowd = "";
-        $temporal_path = $GLOBALS['config']['temporal_path'];
+        $temporal_path = $GLOBALS['config']['public_html'];
         $t_crowd_client = $GLOBALS['config']['t-crowd-client'];
         $class_client = $GLOBALS['config']['t-crowd-main'];
 
         $uuid = uniqid();
 
-        $temporal_path = realpath($temporal_path) . "/";
+        $temporal_path = realpath($temporal_path) . "/" . $uuid . "/";
+        mkdir($temporal_path, 0755);
+        $this->currentTmpFolder = $temporal_path;
+
         $ervt_name = $uuid . "ervt_model.json";
-        $file_path = $temporal_path . $ervt_name;
+        $file_path = $this->currentTmpFolder . $ervt_name;
 
         $t_crowd .= Connector::PROGRAM_CMD . " " . Connector::PROGRAM_PARAMS . " " . $t_crowd_client . " " . $class_client . " " . $command;
         $commandline = $t_crowd . " -t " . $file_path;

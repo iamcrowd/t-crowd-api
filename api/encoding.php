@@ -23,7 +23,8 @@ if ( ! array_key_exists('json', $_POST)){
     $command = "";
     $encoding = new Encode();
     $ans = $encoding->encode($_POST['json'], $formal);
-    $command .= "latex2html " . "./tdl2TDLLiteFPX_tbox.tex";
+    $connectorDir = $encoding->getCurrentConnector()->getCurrentTmpFolder();
+    $command .= "latex2html " . $connectorDir . "*.tex";
     exec($command);
     print_r($ans);
 
