@@ -26,7 +26,7 @@ if ( ! array_key_exists('json', $_POST)){
     $connectorDir = $encoding->getCurrentConnector()->getCurrentTmpFolder();
     $command .= "latex2html " . $connectorDir . "*.tex";
     exec($command);
-    print_r($ans);
+    print_r($connectorDir);
 
 }
 ?>
