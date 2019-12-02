@@ -48,11 +48,11 @@ class Sat {
 
        @return an answer object.
      */
-    function check_sat($json_str){
+    function check_sat($json_str, $query){
 
         $format = $this->getSolver()->getSolverNick();
         $encoding = new Encode();
-        $encoding->encode($json_str, $format);
+        $encoding->encode($json_str, $format, $query);
         $tmpFolderSolver = $encoding->getCurrentConnector()->getCurrentTmpFolder();
         $this->getSolver()->run($tmpFolderSolver);
         $answer = $this->getSolver()->get_answer();

@@ -24,10 +24,13 @@
 include("../api/config.php");
 include("../api/connector.php");
 include("../src/sat.php");
+include("../src/nuSMV.php");
 
 //use Tcrowd\api\Connector;
 use Tcrowd\src\Sat;
+use Tcrowd\src\NuSMV;
 use PHPUnit\Framework\TestCase;
+
 
 class SatTest extends TestCase
 {
@@ -36,9 +39,11 @@ class SatTest extends TestCase
 
         $json_str = "a";
 
-        $t_crowd = new Sat();
+        $solver = new NuSMV();
 
-        $ans = $t_crowd->check_sat($json_str,'NuSMV');
+        $t_crowd = new Sat($solver);
+
+        $ans = $t_crowd->check_sat($json_str,'NuSMV', 'Entity');
 
         print_r($ans);
 

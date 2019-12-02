@@ -48,9 +48,9 @@ class Encode {
 
        @return an answer object.
      */
-    function encode($json_str, $encoding = 'tdllitefpx'){
+    function encode($json_str, $encoding = 'tdllitefpx', $query = ""){
 
-        $this->connector->run($json_str, $encoding);
+        $this->connector->run($json_str, $encoding, $query);
         $answer = $this->connector->get_answer();
 
 		    return $answer;

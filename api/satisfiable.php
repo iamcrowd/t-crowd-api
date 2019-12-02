@@ -14,10 +14,14 @@ if (array_key_exists('reasoner',$_REQUEST)){
     $reasoner = $_REQUEST['reasoner'];
 }
 
+$query = '';
+if (array_key_exists('query',$_REQUEST)){
+    $query = $_REQUEST['query'];
+}
+
 if ( ! array_key_exists('json', $_POST)){
     echo "I can not find any \"json\" parameter :-(";
 }else{
-
     switch ($reasoner) {
       case 'NuSMV':
           $solver = new NuSMV();
@@ -29,7 +33,7 @@ if ( ! array_key_exists('json', $_POST)){
     }
 
     $sat = new Sat($solver);
-    $ans = $sat->check_sat($_POST['json']);
+    $ans = $sat->check_sat($_POST['json'], $_POST['query']);
     print_r($ans);
 }
 ?>

@@ -52,7 +52,7 @@ class Connector {
        Execute t_crowd with the given $document as input.
        java -cp target/dependency/t-crowd-cli-4.0.0-SNAPSHOT.jar it.gilia.tcrowd.cli.TCrowd tdllitefpx -t value.json
      */
-    function run($input, $command){
+    function run($input, $command, $query){
         $t_crowd = "";
         $temporal_path = $GLOBALS['config']['public_html'];
         $t_crowd_client = $GLOBALS['config']['t-crowd-client'];
@@ -68,7 +68,17 @@ class Connector {
         $file_path = $this->currentTmpFolder . $ervt_name;
 
         $t_crowd .= Connector::PROGRAM_CMD . " " . Connector::PROGRAM_PARAMS . " " . $t_crowd_client . " " . $class_client . " " . $command;
-        $commandline = $t_crowd . " -t " . $file_path;
+
+        if ($command == "tdllitefpx"){
+          $commandline = $t_crowd . " -t " . $file_path;
+        }else{
+          $query_name = $uuid . "query.txt";
+          $file_query_path = $this->currentTmpFolder . $query_name;
+          $query_file = fopen($file_query_path, "w");
+          fwrite($query_file, $query);
+          fclose($query_file);
+          $commandline = $t_crowd . " -t " . $file_path . " -q " . $file_query_path;
+        }
 
         $ervt_file = fopen($file_path, "w");
 
