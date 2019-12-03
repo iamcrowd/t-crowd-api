@@ -31,23 +31,30 @@ use Tcrowd\src\Encode;
 class Sat {
 
     protected $solver = null;
+    protected $answer = null;
 
     function __construct($solver){
       $this->solver = $solver;
+      $this->answer = null;
     }
 
     function getSolver(){
       return $this->solver;
     }
 
+    function getSatAnswer(){
+      return $this->answer;
+    }
+
     /**
-       Check the diagram represented in JSON format for satisfiability.
+       Check the diagram represented in JSON format for satisfiability. Reasoner output is saved
+       into the protected var $answer.
 
        @param $json_str A String with the diagram in JSON format.
        @param $query A String with the query. If query is the empty string, KB is checked for satisfiability.
-       If query is not empty, the entity consistency service is executed. 
+       If query is not empty, the entity consistency service is executed.
 
-       @return an answer object.
+       @return temporal path to output file.
      */
     function check_sat($json_str, $query){
 
@@ -56,9 +63,9 @@ class Sat {
         $encoding->encode($json_str, $format, $query);
         $tmpFolderSolver = $encoding->getCurrentConnector()->getCurrentTmpFolder();
         $this->getSolver()->run($tmpFolderSolver);
-        $answer = $this->getSolver()->get_answer();
+        $this->answer = $this->getSolver()->get_answer();
 
-		    return $answer;
+		    return $tmpFolderSolver;
     }
 }
 
