@@ -50,6 +50,9 @@ class NuSMV extends Solver{
       return $this->answer;
     }
 
+    /**
+      Save reasoner output into a file. Temporal folder is given as input.
+    */
     function saveToFile($tmpfolder){
       $out_name = "reasoner_out.txt";
       $file_out_path = $tmpfolder . $out_name;
@@ -59,7 +62,8 @@ class NuSMV extends Solver{
     }
 
     /**
-       Execute t_crowd with the given $document as input.
+       Execute NuSMV and save the results into a temporal file. Temporal directory is given
+       as input.
      */
     function run($folder){
       $t_crowd = "";

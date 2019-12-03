@@ -44,7 +44,8 @@ class Sat {
        Check the diagram represented in JSON format for satisfiability.
 
        @param $json_str A String with the diagram in JSON format.
-       @param $reasoner A String with the off-the-shelf reasoner name.
+       @param $query A String with the query. If query is the empty string, KB is checked for satisfiability.
+       If query is not empty, the entity consistency service is executed. 
 
        @return an answer object.
      */
