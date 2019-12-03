@@ -26,5 +26,7 @@ namespace Tcrowd\src;
 include("../api/config.php");
 
 abstract class Solver {
-  
+
+  abstract function saveToFile($tmpfolder);
+
 }

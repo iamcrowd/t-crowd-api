@@ -39,7 +39,7 @@ class NuSMV extends Solver{
     protected $answer = [];
 
     function __construct(){
-        $this->answer = [];
+      $this->answer = [];
     }
 
     function getSolverNick(){
@@ -47,22 +47,29 @@ class NuSMV extends Solver{
     }
 
     function get_answer(){
-        return $this->answer;
+      return $this->answer;
+    }
+
+    function saveToFile($tmpfolder){
+      $out_name = "reasoner_out.txt";
+      $file_out_path = $tmpfolder . $out_name;
+      $out_file = fopen($file_out_path, "w");
+      fwrite($out_file, join($this->answer));
+      fclose($out_file);
     }
 
     /**
        Execute t_crowd with the given $document as input.
      */
     function run($folder){
-        $t_crowd = "";
-        $solver_path = $GLOBALS['config']['nusmv_path'];
+      $t_crowd = "";
+      $solver_path = $GLOBALS['config']['nusmv_path'];
 
-        $t_crowd .= $solver_path . NuSMV::PROGRAM_CMD . " " . NuSMV::PROGRAM_PARAMS . " ";
-        $commandline = $t_crowd . $folder . "*.smv";
+      $t_crowd .= $solver_path . NuSMV::PROGRAM_CMD . " " . NuSMV::PROGRAM_PARAMS . " ";
+      $commandline = $t_crowd . $folder . "*.smv";
 
-        exec($commandline, $this->answer);
-
-        print_r($commandline);
+      exec($commandline, $this->answer);
+      $this->saveToFile($folder);
     }
 
 }
