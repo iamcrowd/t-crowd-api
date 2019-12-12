@@ -51,8 +51,13 @@ class Connector {
     /**
        Execute t_crowd with the given $document as input.
        java -cp target/dependency/t-crowd-cli-4.0.0-SNAPSHOT.jar it.gilia.tcrowd.cli.TCrowd tdllitefpx -t value.json
+
+       @param $input String temporal model
+       @param $data String temporal data
+       @param $command String command to be executed
+       @param $query String query
      */
-    function run($input, $command, $query){
+    function run($input, $data, $command, $query){
         $t_crowd = "";
         $temporal_path = $GLOBALS['config']['public_html'];
         $t_crowd_client = $GLOBALS['config']['t-crowd-client'];
@@ -67,32 +72,45 @@ class Connector {
         $ervt_name = $uuid . "ervt_model.json";
         $file_path = $this->currentTmpFolder . $ervt_name;
 
+        $data_name = $uuid . "temp_data.json";
+        $file_path_data = $this->currentTmpFolder . $data_name;
+
         $t_crowd .= Connector::PROGRAM_CMD . " " . Connector::PROGRAM_PARAMS . " " . $t_crowd_client . " " . $class_client . " " . $command;
 
         if ($command == "tdllitefpx"){
-          $commandline = $t_crowd . " -t " . $file_path;
+          $commandline = $t_crowd . " -t " . $file_path . " -a" . $file_path_data;
         }else{
           $query_name = $uuid . "query.txt";
           $file_query_path = $this->currentTmpFolder . $query_name;
           $query_file = fopen($file_query_path, "w");
           fwrite($query_file, $query);
           fclose($query_file);
-          $commandline = $t_crowd . " -t " . $file_path . " -q " . $file_query_path;
+          $commandline = $t_crowd . " -t " . $file_path . " -a" . $file_path_data . " -q " . $file_query_path;
         }
 
         $ervt_file = fopen($file_path, "w");
+        $data_file = fopen($file_path_data, "w");
 
         if (! $ervt_file){
             throw new \Exception("Temporal file couldn't be opened for writing...
             Is the path '$file_path' correct?");
         }
 
+        if (! $data_file){
+            throw new \Exception("Temporal data file couldn't be opened for writing...
+            Is the path '$file_path_data' correct?");
+        }
+
         fwrite($ervt_file, $input);
         fclose($ervt_file);
+
+        fwrite($data_file, $data);
+        fclose($data_file);
 
         exec($commandline, $answer_lib);
 
         unlink($file_path);
+        unlink($file_path_data);
 
         array_push($this->answer, $answer_lib);
     }

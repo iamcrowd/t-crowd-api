@@ -51,16 +51,17 @@ class Sat {
        into the protected var $answer.
 
        @param $json_str A String with the diagram in JSON format.
+       @param $data_str A String with temporal data in JSON format.
        @param $query A String with the query. If query is the empty string, KB is checked for satisfiability.
        If query is not empty, the entity consistency service is executed.
 
        @return temporal path to output file.
      */
-    function check_sat($json_str, $query){
+    function check_sat($json_str, $data_str, $query){
 
         $format = $this->getSolver()->getSolverNick();
         $encoding = new Encode();
-        $encoding->encode($json_str, $format, $query);
+        $encoding->encode($json_str, $data_str, $format, $query);
         $tmpFolderSolver = $encoding->getCurrentConnector()->getCurrentTmpFolder();
         $this->getSolver()->run($tmpFolderSolver);
         $this->answer = $this->getSolver()->get_answer();

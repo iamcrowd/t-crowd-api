@@ -44,13 +44,14 @@ class Encode {
        Encoding the diagram represented in JSON format.
 
        @param $json_str A String with the diagram in JSON format.
+       @param $data_str A String with temporal data in JSON format.
        @param $encoding A String with the encode name (tdllitefpx|qtlz|qtlN,ltl).
 
        @return an answer object.
      */
-    function encode($json_str, $encoding = 'tdllitefpx', $query = ""){
+    function encode($json_str, $data_str, $encoding = 'tdllitefpx', $query = ""){
 
-        $this->connector->run($json_str, $encoding, $query);
+        $this->connector->run($json_str, $data_str, $encoding, $query);
         $answer = $this->connector->get_answer();
 
 		    return $answer;
