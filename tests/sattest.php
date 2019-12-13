@@ -47,8 +47,5 @@ class SatTest extends TestCase
 
         print_r($ans);
 
-        /*$expected = process_xmlspaces($expected);
-        $actual = process_xmlspaces($actual);
-        $this->assertEqualXMLStructure($expected, $actual, true);*/
     }
 }

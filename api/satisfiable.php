@@ -20,25 +20,30 @@ if (array_key_exists('query',$_REQUEST)){
 }
 
 if ( ! array_key_exists('json', $_POST)){
-    echo "I can not find any \"json\" parameter :-(";
+    echo "I can not find any \"model\" parameter :-(";
 }else{
-    switch ($reasoner) {
-      case 'NuSMV':
+
+    if ( ! array_key_exists('data', $_POST)){
+      echo "I can not find any \"data\" parameter :-(";
+    }else{
+      switch ($reasoner) {
+        case 'NuSMV':
           $solver = new NuSMV();
         break;
 
-      default:
+        default:
           $solver = new NuSMV();
         break;
-    }
+      }
 
-    $sat = new Sat($solver);
-    $ans = $sat->check_sat($_POST['json'], $_POST['query']);
+      $sat = new Sat($solver);
+      $ans = $sat->check_sat($_POST['json'], $_POST['data'], $_POST['query']);
 
     /*$command = "";
     $command .= "latex2html " . $ans . "*.tex";
     exec($command);*/
 
     print_r($ans);
+  }
 }
 ?>
