@@ -19,14 +19,17 @@ if ( ! array_key_exists('json', $_POST)){
     echo "I can not find any \"json\" parameter :-(";
 }else{
 
-    $encoding = "";
-    $command = "";
-    $encoding = new Encode();
-    $ans = $encoding->encode($_POST['json'], $formal);
-    $connectorDir = $encoding->getCurrentConnector()->getCurrentTmpFolder();
-    $command .= "latex2html " . $connectorDir . "*.tex";
-    exec($command);
-    print_r($connectorDir);
-
+    if ( ! array_key_exists('data', $_POST)){
+      echo "I can not find any \"data\" parameter :-(";
+    }else{
+      $encoding = "";
+      $command = "";
+      $encoding = new Encode();
+      $ans = $encoding->encode($_POST['json'], $_POST['data'], $formal);
+      $connectorDir = $encoding->getCurrentConnector()->getCurrentTmpFolder();
+      $command .= "latex2html " . $connectorDir . "*.tex";
+      exec($command);
+      print_r($connectorDir);
+  }
 }
 ?>

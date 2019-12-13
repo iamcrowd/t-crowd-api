@@ -36,8 +36,8 @@ if ( ! array_key_exists('json', $_POST)){
         break;
       }
 
-    $sat = new Sat($solver);
-    $ans = $sat->check_sat($_POST['json'], $_POST['data'], $_POST['query']);
+      $sat = new Sat($solver);
+      $ans = $sat->check_sat($_POST['json'], $_POST['data'], $_POST['query']);
 
     /*$command = "";
     $command .= "latex2html " . $ans . "*.tex";
