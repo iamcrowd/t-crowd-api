@@ -9,7 +9,7 @@ include("../src/nuSMV.php");
 use Tcrowd\src\Sat;
 use Tcrowd\src\NuSMV;
 
-$reasoner = 'NuSMV';
+$reasoner = 'TBoxSatNuSMV';
 if (array_key_exists('reasoner',$_REQUEST)){
     $reasoner = $_REQUEST['reasoner'];
 }
@@ -27,7 +27,7 @@ if ( ! array_key_exists('json', $_POST)){
       echo "I can not find any \"data\" parameter :-(";
     }else{
       switch ($reasoner) {
-        case 'NuSMV':
+        case 'TBoxSatNuSMV':
           $solver = new NuSMV();
         break;
 
@@ -37,7 +37,7 @@ if ( ! array_key_exists('json', $_POST)){
       }
 
       $sat = new Sat($solver);
-      $ans = $sat->check_sat($_POST['json'], $_POST['data'], $_POST['query']);
+      $ans = $sat->check_sat($_POST['json'], $_POST['data'], $_POST['query'], $reasoner);
 
     /*$command = "";
     $command .= "latex2html " . $ans . "*.tex";

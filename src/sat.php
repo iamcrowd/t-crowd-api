@@ -54,14 +54,15 @@ class Sat {
        @param $data_str A String with temporal data in JSON format.
        @param $query A String with the query. If query is the empty string, KB is checked for satisfiability.
        If query is not empty, the entity consistency service is executed.
+       @param $command A string with the command to run t-crowd-lib
 
        @return temporal path to output file.
      */
-    function check_sat($json_str, $data_str, $query){
+    function check_sat($json_str, $data_str, $query, $command){
 
-        $format = $this->getSolver()->getSolverNick();
+        //$format = $this->getSolver()->getSolverNick();
         $encoding = new Encode();
-        $encoding->encode($json_str, $data_str, $format, $query);
+        $encoding->encode($json_str, $data_str, $command, $query);
         $tmpFolderSolver = $encoding->getCurrentConnector()->getCurrentTmpFolder();
         $this->getSolver()->run($tmpFolderSolver);
         $this->answer = $this->getSolver()->get_answer();

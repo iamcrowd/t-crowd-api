@@ -79,13 +79,19 @@ class Connector {
 
         if ($command == "tdllitefpx"){
           $commandline = $t_crowd . " -t " . $file_path . " -a" . $file_path_data;
-        }else{
+        }
+
+        if ($command == "TBoxSatNuSMV"){
           $query_name = $uuid . "query.txt";
           $file_query_path = $this->currentTmpFolder . $query_name;
           $query_file = fopen($file_query_path, "w");
           fwrite($query_file, $query);
           fclose($query_file);
-          $commandline = $t_crowd . " -t " . $file_path . " -a" . $file_path_data . " -q " . $file_query_path;
+          $commandline = $t_crowd . " -t " . $file_path . " -q " . $file_query_path . " -pf ";
+        }
+
+        if ($command == "TBoxABoxSatNuSMV"){
+          $commandline = $t_crowd . " -t " . $file_path . " -a " . $file_path_data;
         }
 
         $ervt_file = fopen($file_path, "w");
