@@ -45,7 +45,7 @@ class Encode {
 
        @param $json_str A String with the diagram in JSON format.
        @param $data_str A String with temporal data in JSON format.
-       @param $encoding A String with the encode name (tdllitefpx|qtlz|qtlN,ltl).
+       @param $encoding A String with the encode name (tdllitefpx|qtlz|qtlN,ltl|NuSMV).
 
        @return an answer object.
      */
