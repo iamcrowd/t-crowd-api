@@ -58,11 +58,11 @@ class Sat {
 
        @return temporal path to output file.
      */
-    function check_sat($json_str, $data_str, $query, $command){
+    function check_sat($json_str, $data_str){
 
         //$format = $this->getSolver()->getSolverNick();
         $encoding = new Encode();
-        $encoding->encode($json_str, $data_str, $command, $query);
+        $encoding->encode($json_str, $data_str);
         $tmpFolderSolver = $encoding->getCurrentConnector()->getCurrentTmpFolder();
         $this->getSolver()->run($tmpFolderSolver);
         $this->answer = $this->getSolver()->get_answer();

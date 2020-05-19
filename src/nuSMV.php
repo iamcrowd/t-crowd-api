@@ -37,9 +37,15 @@ class NuSMV extends Solver{
     const PROGRAM_CMD = "NuSMV";
     const PROGRAM_PARAMS = "-bmc -bmc_length 11";
     protected $answer = [];
+    protected $sett = "";
+    protected $time = "60";
+    protected $memory = "1024";
 
-    function __construct(){
+    function __construct($sett, $time, $memory){
       $this->answer = [];
+      $this->sett = $sett;
+      $this->time = $time;
+      $this->memory = $memory;
     }
 
     function getSolverNick(){
@@ -48,6 +54,20 @@ class NuSMV extends Solver{
 
     function get_answer(){
       return $this->answer;
+    }
+
+    function param(){
+      switch ($this->sett) {
+        case 'BMC':
+            $param = " -bmc -bmc_length 60 ";
+          break;
+        case 'BDD':
+            $param = " -dcx -dynamic ";
+        default:
+            $param = " -bmc -bmc_length 60 ";
+          break;
+      }
+      return $param;
     }
 
     /**
@@ -68,9 +88,10 @@ class NuSMV extends Solver{
     function run($folder){
       $t_crowd = "";
       $solver_path = $GLOBALS['config']['nusmv_path'];
+      $runlim_path = $GLOBALS['config']['runlim_path'];
 
-      $t_crowd .= $solver_path . NuSMV::PROGRAM_CMD . " " . NuSMV::PROGRAM_PARAMS . " ";
-      $commandline = $t_crowd . $folder . "*.smv";
+      $t_crowd .= $solver_path . NuSMV::PROGRAM_CMD . " " . $this->param() . " ";
+      $commandline = $runlim_path . "runlim " . "-r" . $this->time . "-s" . $this->memory . $t_crowd . $folder . "*.smv";
 
       exec($commandline, $this->answer);
       $this->saveToFile($folder);

@@ -49,7 +49,7 @@ class Encode {
 
        @return an answer object.
      */
-    function encode($json_str, $data_str, $encoding = 'tdllitefpx', $query = ""){
+    function encode($json_str, $data_str){
 
         $this->connector->run($json_str, $data_str, $encoding, $query);
         $answer = $this->connector->get_answer();
